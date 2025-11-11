@@ -35,7 +35,7 @@ python3 BasicCNC.py Jobfile.cfg
 
 ## Useful links
 
-[I use Adobe's free converter](https://www.adobe.com/express/feature/image/convert/svg} to turn PNG/JPG/etc. into SVG files.
+[I use Adobe's free converter](https://www.adobe.com/express/feature/image/convert/svg) to turn PNG/JPG/etc. into SVG files.
 
 ## Caveats
 
