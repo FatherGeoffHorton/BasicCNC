@@ -131,42 +131,29 @@ def enkode(path, cut_depth, total_depth):
         z += cut_depth
     return path_string
     
-
+FEED_RATE = bitdata["FEED_RATE"]
 gcodefile = open(OUTFILE, "w")
 gcodefile.write(PREAMBLE)
-
-#for path in svgpath.paths_to_points(paths, resolution=1):
-#    for trace in path:
-#        i = i + 1
-#        if showonly is None or i in showonly:
-#            style = styles[i % 5]
-#            ax.plot(trace[:, 0], trace[:, 1], style, label = f"{i}")
-#plt.legend(loc = "best")
-#plt.show()
+gcodefile.write(f"F{FEED_RATE}\n")
 
 CUT_LIST = eval(data["cuts"]["CUT_LIST"])
 default_type = data["cuts"]["default_type"]
 default_depth = data["cuts"]["default_depth"]
-print(default_type)
+
 i = 0
-print(CUT_LIST)
 for path in toolpaths:
     i = i + 1
     cut_info = CUT_LIST.get(i, None)
     if cut_info is None:
-        print(f"No data for path {i}; using defaults")
         cut_info = (default_type, default_depth)
     else:
         cut_type = cut_info[0]
     if cut_type == "x":
-        print(f"Skipping path {i}")
         continue
     else:
         full_depth = cut_info[1]
-    print(f"For path {i}, cut_type = {cut_type}, full_depth = {full_depth}")
     path_string = ""
     if cut_type.lower() == "c":
-        print(f"Cutting path {i}")
         cut_depth = bitdata["CUT_DEPTH"]
         stryng = enkode(path, cut_depth, full_depth)
     gcodefile.write(f"(Path #{i})\n")
